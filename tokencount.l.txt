@@ -1,0 +1,26 @@
+%{
+#include<stdio.h>
+
+int count = 0;
+%}
+
+%%
+
+[ \t]+          ;
+\n              { return 0; }
+[^ \t\n]+       { count++; }
+
+%%
+
+int yywrap()
+{
+    return 1;
+}
+
+int main()
+{
+    printf("Enter a sentence: ");
+    yylex();
+    printf("\nNumber of Tokens = %d\n", count);
+    return 0;
+}
